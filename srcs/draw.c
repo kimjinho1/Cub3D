@@ -3,15 +3,7 @@
 /*
 void	draw_img(t_info *info, char c, int x, int y)
 {
-	mlx_put_image_to_window(info->mlx, info->win, info->g_img, x, y);
-	if (c == '1')
-		mlx_put_image_to_window(info->mlx, info->win, info->w_img, x, y);
-	else if (c == 'P')
-		mlx_put_image_to_window(info->mlx, info->win, info->p_img, x, y);
-	else if (c == 'C')
-		mlx_put_image_to_window(info->mlx, info->win, info->c_img, x, y);
-	else if (c == 'E')
-		mlx_put_image_to_window(info->mlx, info->win, info->e_img, x, y);
+	;
 }
 
 void	draw_map(t_info *info)

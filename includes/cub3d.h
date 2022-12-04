@@ -24,8 +24,9 @@
 
 typedef struct s_info
 {
-	char	*map_path;
 	int		fd;
+	int		*check_li;
+	int		check_cnt;
 	char	**map;
 	int		h;
 	int		w;

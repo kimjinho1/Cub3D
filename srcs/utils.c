@@ -40,15 +40,16 @@ void	free_info(t_info *info)
 	free(info->map);
 }
 
-void	perror_exit(char *opt)
+void	perror_exit(char *str)
 {
-	perror(opt);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n", 2);
 	exit(EXIT_FAILURE);
 }
 
-void	perror_free_exit(char *opt, t_info *info)
+void	perror_free_exit(char *str, t_info *info)
 {
-	perror(opt);
+	ft_putstr_fd(str, 2);
 	free_info(info);
 	exit(EXIT_FAILURE);
 }
