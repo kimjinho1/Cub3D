@@ -6,9 +6,11 @@ OBJ_DIR	:= ./objects
 LIB_DIR	:= ./libft
 
 SRC = main.c \
-		utils.c \
 		gnl.c \
 		gnl_utils.c \
+		utils.c \
+		exit.c \
+		check1.c \
 		parsing.c \
 		draw.c \
 		move.c \

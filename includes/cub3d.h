@@ -25,8 +25,15 @@
 typedef struct s_info
 {
 	int		fd;
+
 	int		*check_li;
 	int		check_cnt;
+
+	char	**texture_image_paths;
+	void	**texture_images;
+	int		*f_rgb;
+	int		*c_rgb;
+
 	char	**map;
 	int		h;
 	int		w;
@@ -46,12 +53,19 @@ char			*gnl_strjoin(char *s1, char *s2);
 int				get_next_line(int fd, char **line);
 
 //utils.c
+void			init_info(t_info *info);
 void			free_info(t_info *info);
-void			init_info(t_info *info, char *map_path);
+void			free_arr(char **arr);
+int				check_arr_size(char *str, char c, int n);
 
+//exit.c
 void			perror_exit(char *opt);
 void			perror_free_exit(char *opt, t_info *info);
 int				mlx_destroy_exit(t_info *info);
+
+//check1.c
+int				check_cub(t_info *info, char *path);
+int				check_element(t_info *info);
 
 void			parse_map(t_info *info);
 
