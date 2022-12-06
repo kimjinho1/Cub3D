@@ -54,6 +54,11 @@ void	free_info(t_info *info)
 	while (++i < 4)
 		free(info->texture_image_paths[i]);
 	free(info->texture_image_paths);
+	i = -1;
+	while (++i < info->map_height)
+		free(info->map[i]);
+	free(info->map);
+	free(info->first_line);
 }
 
 void	free_arr(char **arr)

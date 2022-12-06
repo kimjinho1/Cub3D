@@ -1,20 +1,18 @@
 #include "cub3d.h"
 
-void check_map2_insert(t_info *info, char *map_low, char *line)
+void	check_map2_insert(t_info *info, char *map_low, char *line)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])
-	{
 		map_low[i] = line[i];
-	}
-	i --;
+	i--;
 	while (++i < info->map_width)
 		map_low[i] = ' ';
 }
 
-int check_map2_init(t_info *info)
+int	check_map2_init(t_info *info)
 {
 	int		i;
 	char	*line;
@@ -31,14 +29,16 @@ int check_map2_init(t_info *info)
 	{
 		get_next_line(info->fd, &line);
 		if (ft_strncmp(line, info->first_line, info->map_width) == 0)
-			break;
+			break ;
 		free(line);
 	}
 	while (++i < info->map_height)
 	{
 		check_map2_insert(info, info->map[i], line);
+		free(line);
 		get_next_line(info->fd, &line);
 	}
+	free(line);
 	close (info->fd);
 	return (0);
 }
@@ -67,18 +67,17 @@ int check_map2_valid(t_info *info)
 	int j;
 
 	i = -1;
-	j = -1;
 	while (++i < info->map_height)
 	{
+		j = -1;
 		while (++j < info->map_width)
 		{
 			if (check_map2_valid_loop(info, j, i) == -1)
 			{
-				printf("%d %d\n",j,i);
+				printf("%d %d\n", j, i);
 				return (-1);
 			}
 		}
-		j = -1;
 	}
 	return (0);
 }
@@ -87,11 +86,12 @@ int	check_map2(t_info *info)
 {
 	if (check_map2_init(info) == -1)
 		return (-1);
-	int i = -1;
+	int	i = -1;
 	printf("--- PRINT MAP ---\n");
 	while (++i < info->map_height)
 		printf("%s-\n", info->map[i]);
-	if (check_map2_valid(info) == -1)
+	printf("nsew: %c \n", info->NSEW);
+	if (check_map2_valid(info) == -1 || info->NSEW == 0)
 		return (-1);
 	return (1);
 }

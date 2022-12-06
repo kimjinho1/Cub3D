@@ -35,6 +35,13 @@ typedef struct s_info
 	int		*c_rgb;
 
 	char	**map;
+	int		map_width;
+	int 	map_height;
+	char 	*first_line;
+	char 	NSEW;
+	int 	empty_flag;
+	char 	*av_path;
+
 	int		h;
 	int		w;
 	int		y;
@@ -42,13 +49,6 @@ typedef struct s_info
 	int		img_len;
 	void	*mlx;
 	void	*win;
-	int		map_width;
-	int 	map_height;
-	char 	*first_line;
-	int 	NSEW_flag;
-	char 	NSEW;
-	int 	empty_flag;
-	char 	*av_path;
 }				t_info;
 
 // gnl.c

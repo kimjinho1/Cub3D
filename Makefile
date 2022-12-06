@@ -33,7 +33,7 @@ $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 
 $(NAME): $(OBJ)
 	make -C $(LIB_DIR)
-	$(CC) $(OBJ) $(CFLAGS) -L $(LIB_DIR) -l ft $(MLX_WIN_FLAGS) -o $(NAME)
+	$(CC) $(OBJ) $(CFLAGS) -L $(LIB_DIR) -l ft $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

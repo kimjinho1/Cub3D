@@ -9,20 +9,19 @@ static int	check_map_line(t_info *info, char *line)
 		return (1);
 	else if (ft_strlen(line) == 0 && info->empty_flag != 0)
 		return (-1);
-	//check_arr_size(line, ' ', 2)
-	// -> ft_split(line, ' ')의 길이가 2인지 확인함 아니면 -1
 	while (line[++i])
 	{
-		if (info->NSEW_flag > 1)
+		if (info->NSEW != 0 && (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W'))
 			return (-1);
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
 		{
 			info->NSEW = line[i];
-			info->NSEW_flag ++;
+			printf("line: %c\n", line[i]);
+			printf("nsew: %c\n", info->NSEW);
 		}
 		else if (line[i] != '1' && line[i] != ' ' && line[i] != '0')
 			return (-1);
-		i ++;
+		i++;
 	}
 	if (info->map_width < i - 1)
 		info->map_width = i - 1;
@@ -33,7 +32,7 @@ static int	check_map_line(t_info *info, char *line)
 
 void check_map_init(t_info *info)
 {
-	info->NSEW_flag = 0;
+	info->NSEW = 0;
 	info->empty_flag = 0;
 	info->map_height = 0;
 	info->first_line = NULL;

@@ -51,7 +51,6 @@ int	main(int ac, char **av)
 		perror_exit("map error");
 	if (check_map2(&info) == -1)
 		perror_exit("map2 error");
-	exit(1);
 	// 맵 파싱 전까지는 에러, 누수 다 잡은 것 같음. 테스트 바람
 	// 이제 개행이면 넘긴 후에 맵 파싱 구현해야함
 //	for (int i = 0; i < 4; i++)
