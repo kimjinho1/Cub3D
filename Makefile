@@ -12,6 +12,7 @@ SRC = main.c \
 		exit.c \
 		check1.c \
 		map_check.c \
+		map_check2.c \
 		parsing.c \
 		draw.c \
 		move.c \

@@ -12,6 +12,7 @@ int	check_cub(t_info *info, char *path)
 	info->fd = open(path, O_RDONLY);
 	if (info->fd == -1)
 		return (-1);
+	info->av_path = path;
 	return (1);
 }
 

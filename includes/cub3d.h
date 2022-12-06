@@ -45,9 +45,10 @@ typedef struct s_info
 	int		map_width;
 	int 	map_height;
 	char 	*first_line;
-	int 	first_flag;
 	int 	NSEW_flag;
+	char 	NSEW;
 	int 	empty_flag;
+	char 	*av_path;
 }				t_info;
 
 // gnl.c

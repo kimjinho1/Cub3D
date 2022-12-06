@@ -16,7 +16,10 @@ static int	check_map_line(t_info *info, char *line)
 		if (info->NSEW_flag > 1)
 			return (-1);
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+		{
+			info->NSEW = line[i];
 			info->NSEW_flag ++;
+		}
 		else if (line[i] != '1' && line[i] != ' ' && line[i] != '0')
 			return (-1);
 		i ++;
@@ -24,7 +27,6 @@ static int	check_map_line(t_info *info, char *line)
 	if (info->map_width < i - 1)
 		info->map_width = i - 1;
 	info->map_height++;
-	info->first_flag = 1;
 	info->empty_flag = 1;
 	return (1);
 }
@@ -35,8 +37,8 @@ void check_map_init(t_info *info)
 	info->empty_flag = 0;
 	info->map_height = 0;
 	info->first_line = NULL;
-	info->first_flag = 0;
 }
+
 int	check_map(t_info *info)
 {
 	char	*line;
@@ -47,9 +49,9 @@ int	check_map(t_info *info)
 		if (get_next_line(info->fd, &line) == 0 && ft_strlen(line) == 0)
 		{
 			close(info->fd);
+			free(line);
 			if (info->empty_flag == 1)
 				return (1);
-			free(line);
 			return (-1);
 		}
 		if (check_map_line(info, line) == -1)
@@ -58,10 +60,10 @@ int	check_map(t_info *info)
 			free(line);
 			return (-1);
 		}
-		if (info->first_flag != 0)
+		if (info->map_height == 1)
 		{
-			info->first_line = malloc(sizeof(line));
-			info->first_line = line;
+			info->first_line = malloc(sizeof(char) * ft_strlen(line));
+			ft_strlcpy(info->first_line, line, ft_strlen(line) + 1);
 		}
 		free(line);
 	}
