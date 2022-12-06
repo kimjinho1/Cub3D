@@ -10,27 +10,30 @@ SRC = main.c \
 		gnl_utils.c \
 		utils.c \
 		exit.c \
-		check1.c \
+		element_check.c \
+		map_check.c \
+		map_check2.c \
 		parsing.c \
 		draw.c \
 		move.c \
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-MLX_FLAGS = -L ./mlx -lmlx -framework OpenGL -framework Appkit
+MLX_FLAGS = -L ./mlx -lmlx -framework OpenGL -framework Appkit #Mac
+MLX_WIN_FLAGS = -lbsd -lmlx -lXext -lX11 -lm #window
 RM = rm -rf
 
 OBJ := $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	make -C $(LIB_DIR)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) -o $(NAME) $(OBJ) -L $(LIB_DIR) -l ft
-
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I$(LIB_DIR) -I$(INC_DIR) -o $@ -c $<
+
+$(NAME): $(OBJ)
+	make -C $(LIB_DIR)
+	$(CC) $(OBJ) $(CFLAGS) -L $(LIB_DIR) -l ft $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)
@@ -77,3 +80,10 @@ re: fclean all
 # 1. 0일 경우 - 4방 검사
 # 2. NSEW일 경우 - 0과 같은 판정, 여러개 나올시 엘
 # 3. 공백일 경우 - 
+
+#info.win = mlx_new_window(info.mlx, info.img_len * info.w,
+#	info.img_len * info.h, "zelda so_long");
+#	draw_map(&info);
+#	mlx_hook(info.win, X_EVENT_KEY_RELEASE, 0, &key_press, &info);
+#	mlx_hook(info.win, X_EVENT_KEY_EXIT, 0, &mlx_destroy_exit, &info);
+#	mlx_loop(info.mlx);

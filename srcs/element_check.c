@@ -12,6 +12,7 @@ int	check_cub(t_info *info, char *path)
 	info->fd = open(path, O_RDONLY);
 	if (info->fd == -1)
 		return (-1);
+	info->av_path = path;
 	return (1);
 }
 
@@ -70,26 +71,17 @@ static int	set_color(t_info *info, int ret, char *str)
 
 static int	check_element_line(t_info *info, char *line)
 {
-	int		i;
 	char	**li;
 	int		ret;
 
-	// 공백 넘기기
 	if (ft_strlen(line) == 0)
 		return (1);
-	//check_arr_size(line, ' ', 2)
-	// -> ft_split(line, ' ')의 길이가 2인지 확인함 아니면 -1
 	if (check_arr_size(line, ' ', 2) == -1)
 		return (-1);
-	i = -1;
 	li = ft_split(line, ' ');
-	// 6개 중 하나인지 확인
 	ret = check_order(info, li);
-	// NO, SO, WE, EA 이면 이미지 파일 경로 저장
-	// 이미지 연거 저장해주는거 만들어야함
 	if (ret >= 0 && ret <= 3)
 		info->texture_image_paths[ret] = ft_strdup(li[1]);
-	// f, c 이면 색깔 저장
 	else if (ret >= 4 && ret <= 5)
 	{
 		if (set_color(info, ret, li[1]) == -1)
@@ -104,10 +96,8 @@ static int	check_element_line(t_info *info, char *line)
 
 int	check_element(t_info *info)
 {
-	int		i;
 	char	*line;
 
-	i = -1;
 	while (info->check_cnt < 6)
 	{
 		if (get_next_line(info->fd, &line) == 0)
