@@ -1,15 +1,21 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./maps/map.cub
+SO ./maps/map.cub
+WE ./maps/map.cub
+EA ./maps/map.cub
 
 F 220,100,0
 C 225,30,0
 
+
 11111 1111111
-1N111 1000001
-1000111011111
-100000001
-1000000011111
-1000000011  1
-1111111111111
+1N111 1000111
+1100111011           1
+  10000111          101
+111111111            1
+1001  11 1  1
+1111  11 1 1
+             
+               
+1111111111
+1000000001
+1111111111

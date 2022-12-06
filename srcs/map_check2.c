@@ -10,6 +10,7 @@ void	check_map2_insert(t_info *info, char *map_low, char *line)
 	i--;
 	while (++i < info->map_width)
 		map_low[i] = ' ';
+	map_low[i] = 0;
 }
 
 int	check_map2_init(t_info *info)
@@ -17,9 +18,6 @@ int	check_map2_init(t_info *info)
 	int		i;
 	char	*line;
 
-	info->fd = open(info->av_path, O_RDONLY);
-	if (info->fd == -1)
-		return (-1);
 	i = -1;
 	info->map = (char **)malloc(sizeof(char *) * info->map_height);
 	while (++i < info->map_height)
@@ -39,15 +37,16 @@ int	check_map2_init(t_info *info)
 		get_next_line(info->fd, &line);
 	}
 	free(line);
-	close (info->fd);
+	close(info->fd);
 	return (0);
 }
 
-int check_map2_valid_loop(t_info *info, int ga, int se)
+int	check_map2_valid_loop(t_info *info, int ga, int se)
 {
-	if (info->map[se][ga] == '0' || info->map[se][ga] == info->NSEW)
+	if (info->map[se][ga] == '0' || info->map[se][ga] == info->nsew)
 	{
-		if (ga <= 0 || se <= 0 || ga >= info->map_width - 1 || se >= info->map_height - 1)
+		if (ga <= 0 || se <= 0 || ga >= info->map_width - 1 || \
+			se >= info->map_height - 1)
 			return (-1);
 		else
 		{
@@ -61,10 +60,10 @@ int check_map2_valid_loop(t_info *info, int ga, int se)
 	return (0);
 }
 
-int check_map2_valid(t_info *info)
+int	check_map2_valid(t_info *info)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = -1;
 	while (++i < info->map_height)
@@ -84,14 +83,18 @@ int check_map2_valid(t_info *info)
 
 int	check_map2(t_info *info)
 {
+	int	i;
+
+	info->fd = open(info->av_path, O_RDONLY);
+	if (info->fd == -1)
+		return (-1);
 	if (check_map2_init(info) == -1)
 		return (-1);
-	int	i = -1;
-	printf("--- PRINT MAP ---\n");
+	i = -1;
 	while (++i < info->map_height)
 		printf("%s-\n", info->map[i]);
-	printf("nsew: %c \n", info->NSEW);
-	if (check_map2_valid(info) == -1 || info->NSEW == 0)
+	printf("nsew: %c \n", info->nsew);
+	if (check_map2_valid(info) == -1 || info->nsew == 0)
 		return (-1);
 	return (1);
 }

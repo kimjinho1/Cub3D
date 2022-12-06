@@ -36,14 +36,12 @@ typedef struct s_info
 
 	char	**map;
 	int		map_width;
-	int 	map_height;
-	char 	*first_line;
-	char 	NSEW;
-	int 	empty_flag;
-	char 	*av_path;
+	int		map_height;
+	char	*first_line;
+	char	nsew;
+	int		empty_flag;
+	char	*av_path;
 
-	int		h;
-	int		w;
 	int		y;
 	int		x;
 	int		img_len;
@@ -70,9 +68,14 @@ void			perror_exit(char *opt);
 void			perror_free_exit(char *opt, t_info *info);
 int				mlx_destroy_exit(t_info *info);
 
-//check1.c
+//element_check.c
 int				check_cub(t_info *info, char *path);
 int				check_element(t_info *info);
+int				texture_path_check(t_info *info);
+
+//map_check.c
+int				check_map(t_info *info);
+int				check_map2(t_info *info);
 
 void			parse_map(t_info *info);
 
@@ -80,7 +83,4 @@ void			draw_map(t_info *info);
 
 int				key_press(int key, t_info *info);
 
-//map_check.c
-int	check_map(t_info *info);
-int	check_map2(t_info *info);
 #endif
