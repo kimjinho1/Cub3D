@@ -1,12 +1,7 @@
 #include "cub3d.h"
 
-void	a(void) {
-	system("leaks cub3d");
-}
-
 int	main(int ac, char **av)
 {
-	atexit(a);
 	t_info	info;
 
 	if (ac != 2)
@@ -23,7 +18,7 @@ int	main(int ac, char **av)
 	if (check_map2(&info) == -1)
 		perror_exit("map2 error");
 	info.win = mlx_new_window(info.mlx, info.img_len * info.map_width,
-	info.img_len * info.map_height, "zelda so_long");
+			info.img_len * info.map_height, "zelda so_long");
 	draw_map(&info);
 	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
 	mlx_hook(info.win, X_EVENT_KEY_EXIT, 0, &mlx_destroy_exit, &info);

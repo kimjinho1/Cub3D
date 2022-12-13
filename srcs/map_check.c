@@ -3,26 +3,18 @@
 int	texture_path_check(t_info *info)
 {
 	int	i;
-	int	len;
-	int	fd;
 
 	i = -1;
 	while (++i < 4)
 	{
-		len = ft_strlen(info->texture_image_paths[i]);
-		fd = open(info->texture_image_paths[i], O_WRONLY);
-		if (len < 5 || fd == -1)
-			return (-1);
 		info->textures[i].img = mlx_xpm_file_to_image(info->mlx, \
 			info->texture_image_paths[i], &info->textures[i].width, \
 			&info->textures[i].height);
 		if (!info->textures[i].img)
 			return (-1);
-		printf("%d, %s\n", i, info->texture_image_paths[i]);
 		info->textures[i].data_addr = mlx_get_data_addr(
-			info->textures[i].img, &info->textures[i].bpp, \
-			&info->textures[i].size, &info->textures[i].endian);
-		close(fd);
+				info->textures[i].img, &info->textures[i].bpp, \
+				&info->textures[i].size, &info->textures[i].endian);
 	}
 	return (1);
 }

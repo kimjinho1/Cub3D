@@ -53,8 +53,9 @@ typedef struct s_info
 	int			empty_flag;
 	char		*av_path;
 
-	int			y;
-	int			x;
+	double		player_y;
+	double		player_x;
+
 	int			img_len;
 	void		*mlx;
 	void		*win;

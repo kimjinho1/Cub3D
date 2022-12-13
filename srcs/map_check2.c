@@ -72,9 +72,12 @@ static int	check_map2_valid(t_info *info)
 		while (++j < info->map_width)
 		{
 			if (check_map2_valid_loop(info, j, i) == -1)
-			{
-				printf("%d %d\n", j, i);
 				return (-1);
+			if (info->map[i][j] == 'N' || info->map[i][j] == 'E' || \
+				info->map[i][j] == 'S' || info->map[i][j] == 'W')
+			{
+				info->player_y = (double)i + 0.5;
+				info->player_x = (double)j + 0.5;
 			}
 		}
 	}
