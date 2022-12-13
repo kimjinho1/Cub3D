@@ -1,7 +1,7 @@
-NO ./textures/colorstone.xpm
-SO ./textures/greystone.xpm
-WE ./textures/water.xpm
-EA ./textures/wood.xpm
+NO ./textures/N.xpm
+SO ./textures/E.xpm
+WE ./textures/S.xpm
+EA ./textures/W.xpm
 
 F 220,100,0
 C 225,30,0

@@ -28,6 +28,5 @@ int	main(int ac, char **av)
 	mlx_hook(info.win, X_EVENT_KEY_PRESS, 0, &key_press, &info);
 	mlx_hook(info.win, X_EVENT_KEY_EXIT, 0, &mlx_destroy_exit, &info);
 	mlx_loop(info.mlx);
-	//free_info(&info);
 	return (0);
 }

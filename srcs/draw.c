@@ -5,6 +5,15 @@ void	draw_img(t_info *info, char c, int x, int y)
 	if (c == 'N')
 		mlx_put_image_to_window(info->mlx, info->win, \
 			info->textures[0].img, x, y);
+	else if (c == '0')
+		mlx_put_image_to_window(info->mlx, info->win, \
+			info->textures[1].img, x, y);
+	else if (c == '1')
+		mlx_put_image_to_window(info->mlx, info->win, \
+			info->textures[2].img, x, y);
+	else if (c == ' ')
+		mlx_put_image_to_window(info->mlx, info->win, \
+			info->textures[3].img, x, y);
 }
 
 void	draw_map(t_info *info)
