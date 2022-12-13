@@ -39,8 +39,10 @@ void	init_info(t_info *info)
 	info->f_rgb = (int *)malloc(sizeof(int) * 3);
 	info->c_rgb = (int *)malloc(sizeof(int) * 3);
 	info->texture_image_paths = (char **)malloc(sizeof(char *) * 4);
+	info->textures = (t_texture *)malloc(sizeof(t_texture) * 4);
 	while (++i < 6)
 		info->check_li[i] = 0;
+	info->mlx = mlx_init();
 }
 
 void	free_info(t_info *info)
@@ -54,6 +56,7 @@ void	free_info(t_info *info)
 	while (++i < 4)
 		free(info->texture_image_paths[i]);
 	free(info->texture_image_paths);
+	free(info->textures);
 	i = -1;
 	while (++i < info->map_height)
 		free(info->map[i]);

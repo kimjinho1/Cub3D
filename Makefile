@@ -13,7 +13,6 @@ SRC = main.c \
 		element_check.c \
 		map_check.c \
 		map_check2.c \
-		parsing.c \
 		draw.c \
 		move.c \
 
@@ -80,10 +79,3 @@ re: fclean all
 # 1. 0일 경우 - 4방 검사
 # 2. NSEW일 경우 - 0과 같은 판정, 여러개 나올시 엘
 # 3. 공백일 경우 - 
-
-#info.win = mlx_new_window(info.mlx, info.img_len * info.w,
-#	info.img_len * info.h, "zelda so_long");
-#	draw_map(&info);
-#	mlx_hook(info.win, X_EVENT_KEY_RELEASE, 0, &key_press, &info);
-#	mlx_hook(info.win, X_EVENT_KEY_EXIT, 0, &mlx_destroy_exit, &info);
-#	mlx_loop(info.mlx);

@@ -1,7 +1,7 @@
-NO ./maps/map.cub
-SO ./maps/map.cub
-WE ./maps/map.cub
-EA ./maps/map.cub
+NO ./textures/colorstone.xpm
+SO ./textures/greystone.xpm
+WE ./textures/water.xpm
+EA ./textures/wood.xpm
 
 F 220,100,0
 C 225,30,0

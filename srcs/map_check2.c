@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	check_map2_insert(t_info *info, char *map_low, char *line)
+static void	check_map2_insert(t_info *info, char *map_low, char *line)
 {
 	int	i;
 
@@ -13,7 +13,7 @@ void	check_map2_insert(t_info *info, char *map_low, char *line)
 	map_low[i] = 0;
 }
 
-int	check_map2_init(t_info *info)
+static int	check_map2_init(t_info *info)
 {
 	int		i;
 	char	*line;
@@ -41,7 +41,7 @@ int	check_map2_init(t_info *info)
 	return (0);
 }
 
-int	check_map2_valid_loop(t_info *info, int ga, int se)
+static int	check_map2_valid_loop(t_info *info, int ga, int se)
 {
 	if (info->map[se][ga] == '0' || info->map[se][ga] == info->nsew)
 	{
@@ -60,7 +60,7 @@ int	check_map2_valid_loop(t_info *info, int ga, int se)
 	return (0);
 }
 
-int	check_map2_valid(t_info *info)
+static int	check_map2_valid(t_info *info)
 {
 	int	i;
 	int	j;

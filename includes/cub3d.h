@@ -22,31 +22,42 @@
 # define BUFFER_SIZE 	42
 # define OPEN_MAX 		10240
 
+typedef struct s_texture
+{
+	void		*img;
+	char		*data_addr;
+	int			width;
+	int			height;
+	int			bpp;
+	int			size;
+	int			endian;
+}				t_texture;
+
 typedef struct s_info
 {
-	int		fd;
+	int			fd;
 
-	int		*check_li;
-	int		check_cnt;
+	int			*check_li;
+	int			check_cnt;
 
-	char	**texture_image_paths;
-	void	**texture_images;
-	int		*f_rgb;
-	int		*c_rgb;
+	char		**texture_image_paths;
+	t_texture	*textures;
+	int			*f_rgb;
+	int			*c_rgb;
 
-	char	**map;
-	int		map_width;
-	int		map_height;
-	char	*first_line;
-	char	nsew;
-	int		empty_flag;
-	char	*av_path;
+	char		**map;
+	int			map_width;
+	int			map_height;
+	char		*first_line;
+	char		nsew;
+	int			empty_flag;
+	char		*av_path;
 
-	int		y;
-	int		x;
-	int		img_len;
-	void	*mlx;
-	void	*win;
+	int			y;
+	int			x;
+	int			img_len;
+	void		*mlx;
+	void		*win;
 }				t_info;
 
 // gnl.c
@@ -71,10 +82,12 @@ int				mlx_destroy_exit(t_info *info);
 //element_check.c
 int				check_cub(t_info *info, char *path);
 int				check_element(t_info *info);
-int				texture_path_check(t_info *info);
 
 //map_check.c
+int				texture_path_check(t_info *info);
 int				check_map(t_info *info);
+
+//map_check2.c
 int				check_map2(t_info *info);
 
 void			parse_map(t_info *info);

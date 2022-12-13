@@ -81,8 +81,10 @@ void	move_right(t_info *info)
 	printf("move count: %d\n", info->move_cnt);
 }
 
+*/
 int	key_press(int key, t_info *info)
 {
+	/*
 	if (key == KEY_W)
 		move_up(info);
 	else if (key == KEY_A)
@@ -91,11 +93,11 @@ int	key_press(int key, t_info *info)
 		move_down(info);
 	else if (key == KEY_D)
 		move_right(info);
-	else if (key == KEY_ESC)
+	*/
+	if (key == KEY_ESC)
 		mlx_destroy_exit(info);
 	else
 		return (0);
 	draw_map(info);
 	return (1);
 }
-*/
