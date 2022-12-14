@@ -1,100 +1,83 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinhokim <jinhokim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/14 18:23:37 by jinhokim          #+#    #+#             */
+/*   Updated: 2022/12/14 18:23:38 by jinhokim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-/*
-void	move_up(t_info *info)
+static void	move(t_info *info, double dy, double dx)
 {
-	if (info->map[info->y - 1][info->x] == '1')
-		return ;
-	else if (info->map[info->y - 1][info->x] == 'E')
-	{
-		if (info->c_cnt == 0)
-			mlx_destroy_exit(info);
-		else
-			return ;
-	}
-	else if (info->map[info->y - 1][info->x] == 'C')
-		info->c_cnt--;
-	info->map[info->y][info->x] = '0';
-	info->map[info->y - 1][info->x] = 'P';
-	info->move_cnt++;
-	info->y--;
-	printf("move count: %d\n", info->move_cnt);
+	double	y;
+	double	x;
+
+	y = info->player_y + dy * info->move_speed * 3;
+	x = info->player_x + dx * info->move_speed * 3;
+	if (info->map[(int)y][(int)info->player_x] != '1')
+		info->player_y += dy * info->move_speed;
+	if (info->map[(int)info->player_y][(int)x] != '1')
+		info->player_x += dx * info->move_speed;
 }
 
-void	move_left(t_info *info)
+static void	rotate_right(t_info *info)
 {
-	if (info->map[info->y][info->x - 1] == '1')
-		return ;
-	else if (info->map[info->y][info->x - 1] == 'E')
-	{
-		if (info->c_cnt == 0)
-			mlx_destroy_exit(info);
-		else
-			return ;
-	}
-	else if (info->map[info->y][info->x - 1] == 'C')
-		info->c_cnt--;
-	info->map[info->y][info->x] = '0';
-	info->map[info->y][info->x - 1] = 'P';
-	info->move_cnt++;
-	info->x--;
-	printf("move count: %d\n", info->move_cnt);
+	double	old_dir_y;
+	double	old_plane_y;
+
+	old_dir_y = info->dir_y;
+	info->dir_y = info->dir_y * cos(info->rotate_speed) - \
+		info->dir_x * sin(info->rotate_speed);
+	info->dir_x = old_dir_y * sin(info->rotate_speed) + \
+		info->dir_x * cos(info->rotate_speed);
+	old_plane_y = info->plane_y;
+	info->plane_y = info->plane_y * cos(info->rotate_speed) - \
+		info->plane_x * sin(info->rotate_speed);
+	info->plane_x = old_plane_y * sin(info->rotate_speed) + \
+		info->plane_x * cos(info->rotate_speed);
 }
 
-void	move_down(t_info *info)
+static void	rotate_left(t_info *info)
 {
-	if (info->map[info->y + 1][info->x] == '1')
-		return ;
-	else if (info->map[info->y + 1][info->x] == 'E')
-	{
-		if (info->c_cnt == 0)
-			mlx_destroy_exit(info);
-		else
-			return ;
-	}
-	if (info->map[info->y + 1][info->x] == 'C')
-		info->c_cnt--;
-	info->map[info->y][info->x] = '0';
-	info->map[info->y + 1][info->x] = 'P';
-	info->move_cnt++;
-	info->y++;
-	printf("move count: %d\n", info->move_cnt);
+	double	old_dir_y;
+	double	old_plane_y;
+
+	old_dir_y = info->dir_y;
+	printf("1, dir_x: %f, dir_y: %f\n", info->dir_x, info->dir_y);
+	printf("1, plane_x: %f, plane_y: %f\n", info->plane_x, info->plane_y);
+	info->dir_y = info->dir_y * cos(-info->rotate_speed) - \
+		info->dir_x * sin(-info->rotate_speed);
+	info->dir_x = old_dir_y * sin(-info->rotate_speed) + \
+		info->dir_x * cos(-info->rotate_speed);
+	old_plane_y = info->plane_y;
+	info->plane_y = info->plane_y * cos(-info->rotate_speed) - \
+		info->plane_x * sin(-info->rotate_speed);
+	info->plane_x = old_plane_y * sin(-info->rotate_speed) + \
+		info->plane_x * cos(-info->rotate_speed);
+	printf("2, dir_x: %f, dir_y: %f\n", info->dir_x, info->dir_y);
+	printf("2, plane_x: %f, plane_y: %f\n", info->plane_x, info->plane_y);
 }
 
-void	move_right(t_info *info)
-{
-	if (info->map[info->y][info->x + 1] == '1')
-		return ;
-	else if (info->map[info->y][info->x + 1] == 'E')
-	{
-		if (info->c_cnt == 0)
-			mlx_destroy_exit(info);
-		else
-			return ;
-	}
-	if (info->map[info->y][info->x + 1] == 'C')
-		info->c_cnt--;
-	info->map[info->y][info->x] = '0';
-	info->map[info->y][info->x + 1] = 'P';
-	info->move_cnt++;
-	info->x++;
-	printf("move count: %d\n", info->move_cnt);
-}
-
-*/
 int	key_press(int key, t_info *info)
 {
-	/*
 	if (key == KEY_W)
-		move_up(info);
+		move(info, info->dir_y, info->dir_x);
 	else if (key == KEY_A)
-		move_left(info);
+		move(info, -info->dir_x, info->dir_y);
 	else if (key == KEY_S)
-		move_down(info);
+		move(info, -info->dir_y, -info->dir_x);
 	else if (key == KEY_D)
-		move_right(info);
-	*/
-	if (key == KEY_ESC)
+		move(info, info->dir_x, -info->dir_y);
+	else if (key == KEY_LEFT)
+		rotate_left(info);
+	else if (key == KEY_RIGHT)
+		rotate_right(info);
+	else if (key == KEY_ESC)
 		mlx_destroy_exit(info);
 	else
 		return (0);

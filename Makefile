@@ -13,6 +13,7 @@ SRC = main.c \
 		element_check.c \
 		map_check.c \
 		map_check2.c \
+		raycast.c \
 		draw.c \
 		move.c \
 
