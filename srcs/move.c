@@ -48,8 +48,6 @@ static void	rotate_left(t_info *info)
 	double	old_plane_y;
 
 	old_dir_y = info->dir_y;
-	printf("1, dir_x: %f, dir_y: %f\n", info->dir_x, info->dir_y);
-	printf("1, plane_x: %f, plane_y: %f\n", info->plane_x, info->plane_y);
 	info->dir_y = info->dir_y * cos(-info->rotate_speed) - \
 		info->dir_x * sin(-info->rotate_speed);
 	info->dir_x = old_dir_y * sin(-info->rotate_speed) + \
@@ -59,8 +57,6 @@ static void	rotate_left(t_info *info)
 		info->plane_x * sin(-info->rotate_speed);
 	info->plane_x = old_plane_y * sin(-info->rotate_speed) + \
 		info->plane_x * cos(-info->rotate_speed);
-	printf("2, dir_x: %f, dir_y: %f\n", info->dir_x, info->dir_y);
-	printf("2, plane_x: %f, plane_y: %f\n", info->plane_x, info->plane_y);
 }
 
 int	key_press(int key, t_info *info)
@@ -68,11 +64,11 @@ int	key_press(int key, t_info *info)
 	if (key == KEY_W)
 		move(info, info->dir_y, info->dir_x);
 	else if (key == KEY_A)
-		move(info, -info->dir_x, info->dir_y);
+		move(info, -info->dir_y, info->dir_x);
 	else if (key == KEY_S)
 		move(info, -info->dir_y, -info->dir_x);
 	else if (key == KEY_D)
-		move(info, info->dir_x, -info->dir_y);
+		move(info, info->dir_y, -info->dir_x);
 	else if (key == KEY_LEFT)
 		rotate_left(info);
 	else if (key == KEY_RIGHT)
