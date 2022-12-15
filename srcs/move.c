@@ -19,10 +19,16 @@ static void	move(t_info *info, double dy, double dx)
 
 	y = info->player_y + dy * info->move_speed * 3;
 	x = info->player_x + dx * info->move_speed * 3;
-	if (info->map[(int)y][(int)info->player_x] != '1')
+	printf("dy: %f, dx: %f\n", dy, dx);
+	printf("y: %f, x: %f\n", y, x);
+	if ((info->map[(int)y][(int)info->player_x] == '0' || \
+			info->map[(int)y][(int)info->player_x] == info->ewsn) &&
+			(info->map[(int)info->player_y][(int)x] == '0' || \
+			info->map[(int)info->player_y][(int)x] == info->ewsn))
+	{
 		info->player_y += dy * info->move_speed;
-	if (info->map[(int)info->player_y][(int)x] != '1')
 		info->player_x += dx * info->move_speed;
+	}
 }
 
 static void	rotate_right(t_info *info)
@@ -59,16 +65,22 @@ static void	rotate_left(t_info *info)
 		info->plane_x * cos(-info->rotate_speed);
 }
 
+// E -> 회전  좌우
+// W -> move  좌우
+// S -> move  좌우
+// N -> 회전  좌우
+
+
 int	key_press(int key, t_info *info)
 {
 	if (key == KEY_W)
 		move(info, info->dir_y, info->dir_x);
 	else if (key == KEY_A)
-		move(info, -info->dir_y, info->dir_x);
+		move(info, -info->dir_x, info->dir_y);
 	else if (key == KEY_S)
 		move(info, -info->dir_y, -info->dir_x);
 	else if (key == KEY_D)
-		move(info, info->dir_y, -info->dir_x);
+		move(info, info->dir_x, -info->dir_y);
 	else if (key == KEY_LEFT)
 		rotate_left(info);
 	else if (key == KEY_RIGHT)

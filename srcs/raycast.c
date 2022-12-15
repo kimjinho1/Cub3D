@@ -22,10 +22,20 @@ void	first_ray_init(t_info *info)
 	{
 		info->plane_y = 0.0;
 		info->plane_x = 0.0;
+		/*
 		if (info->dir_x != 0)
 			info->plane_y = 0.66;
 		else
+			info->plane_x = -0.66;
+		*/
+		if (info->dir_y > 0)
+			info->plane_x = -0.66;
+		else if (info->dir_y < 0)
 			info->plane_x = 0.66;
+		else if (info->dir_x > 0)
+			info->plane_y = 0.66;
+		else if (info->dir_x < 0)
+			info->plane_y = -0.66;
 		camera_x = 2 * x / (double)WIDTH - 1;
 		info->ray->ray_dir_y = info->dir_y + info->plane_y * camera_x;
 		info->ray->ray_dir_x = info->dir_x + info->plane_x * camera_x;
