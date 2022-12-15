@@ -6,7 +6,7 @@
 #    By: jinhokim <jinhokim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/15 22:32:57 by jinhokim          #+#    #+#              #
-#    Updated: 2022/12/15 22:33:21 by jinhokim         ###   ########.fr        #
+#    Updated: 2022/12/15 22:39:54 by jinhokim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,7 @@ SRC = main.c \
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-MLX_FLAGS = -L ./mlx -lmlx -framework OpenGL -framework Appkit #Mac
-MLX_WIN_FLAGS = -lbsd -lmlx -lXext -lX11 -lm #window
+MLX_FLAGS = -L ./mlx -lmlx -framework OpenGL -framework Appkit
 RM = rm -rf
 
 OBJ := $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
