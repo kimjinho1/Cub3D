@@ -111,6 +111,10 @@ typedef struct s_info
 	void		*win;
 }				t_info;
 
+//main.c
+void			perror_exit(char *opt);
+int				mlx_destroy_exit(t_info *info);
+
 // gnl.c
 size_t			gnl_strlen(const char *s);
 size_t			gnl_strlcpy(char *dst, const char *src, size_t size);
@@ -125,10 +129,6 @@ void			free_parse(t_parse *parse);
 void			free_info(t_info *info);
 void			free_arr(char **arr);
 void			init(t_info *info);
-
-//exit.c
-void			perror_exit(char *opt);
-int				mlx_destroy_exit(t_info *info);
 
 //element_check.c
 int				check_cub(t_parse *parse, char *path);

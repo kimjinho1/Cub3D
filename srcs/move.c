@@ -17,21 +17,21 @@ static void	move(t_info *info, double dy, double dx)
 	double	y;
 	double	x;
 
-	y = info->player_y + dy * info->move_speed * 3;
-	x = info->player_x + dx * info->move_speed * 3;
-	printf("dy: %f, dx: %f\n", dy, dx);
-	printf("y: %f, x: %f\n", y, x);
+	y = info->player_y + dy * info->move_speed * 5;
+	x = info->player_x + dx * info->move_speed * 5;
 	if ((info->map[(int)y][(int)info->player_x] == '0' || \
-			info->map[(int)y][(int)info->player_x] == info->ewsn) &&
+			info->map[(int)y][(int)info->player_x] == info->ewsn) && \
 			(info->map[(int)info->player_y][(int)x] == '0' || \
-			info->map[(int)info->player_y][(int)x] == info->ewsn))
+			info->map[(int)info->player_y][(int)x] == info->ewsn) && \
+			(info->map[(int)y][(int)x] == '0' || \
+			info->map[(int)y][(int)x] == info->ewsn))
 	{
 		info->player_y += dy * info->move_speed;
 		info->player_x += dx * info->move_speed;
 	}
 }
 
-static void	rotate_right(t_info *info)
+static void	rotate_left(t_info *info)
 {
 	double	old_dir_y;
 	double	old_plane_y;
@@ -48,7 +48,7 @@ static void	rotate_right(t_info *info)
 		info->plane_x * cos(info->rotate_speed);
 }
 
-static void	rotate_left(t_info *info)
+static void	rotate_right(t_info *info)
 {
 	double	old_dir_y;
 	double	old_plane_y;
@@ -64,12 +64,6 @@ static void	rotate_left(t_info *info)
 	info->plane_x = old_plane_y * sin(-info->rotate_speed) + \
 		info->plane_x * cos(-info->rotate_speed);
 }
-
-// E -> 회전  좌우
-// W -> move  좌우
-// S -> move  좌우
-// N -> 회전  좌우
-
 
 int	key_press(int key, t_info *info)
 {
