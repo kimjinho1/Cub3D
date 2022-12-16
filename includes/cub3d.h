@@ -13,12 +13,9 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <fcntl.h>
-# include "libft.h"
 # include <math.h>
+# include "libft.h"
 # include "../mlx/mlx.h"
 
 # define X_EVENT_KEY_PRESS	    2
@@ -115,12 +112,14 @@ typedef struct s_info
 void			perror_exit(char *opt);
 int				mlx_destroy_exit(t_info *info);
 
-// gnl.c
+// gnl_utils.c
 size_t			gnl_strlen(const char *s);
 size_t			gnl_strlcpy(char *dst, const char *src, size_t size);
 size_t			gnl_strlcat(char *dst, const char *src, size_t size);
 char			*gnl_strdup(const char *s);
 char			*gnl_strjoin(char *s1, char *s2);
+
+// gnl.c
 int				get_next_line(int fd, char **line);
 
 //utils.c
